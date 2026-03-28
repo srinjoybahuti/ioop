@@ -1,0 +1,99 @@
+class STUDENT {
+    String sname;
+    int[] marks_array;
+    int total;
+    double avg;
+
+    STUDENT(String sname, int[] marks_array) {
+        this.sname = sname;
+        this.marks_array = marks_array;
+    }
+
+    void compute() {
+        total = 0;
+        for (int m : marks_array) total += m;
+        avg = (double) total / marks_array.length;
+    }
+
+    void display() {
+        System.out.println("Name    : " + sname);
+        System.out.print("Marks   : ");
+        for (int m : marks_array) System.out.print(m + " ");
+        System.out.println();
+        System.out.println("Total   : " + total);
+        System.out.println("Average : " + avg);
+    }
+}
+
+class ScienceStudent extends STUDENT {
+    int practicalMarks;
+
+    ScienceStudent(String sname, int[] marks_array, int practicalMarks) {
+        super(sname, marks_array);
+        this.practicalMarks = practicalMarks;
+    }
+
+    @Override
+    void compute() {
+        super.compute();
+        total += practicalMarks;
+        avg = (double) total / (marks_array.length + 1);
+    }
+
+    void displayPracticalMarks() {
+        System.out.println("Practical Marks: " + practicalMarks);
+    }
+
+    @Override
+    void display() {
+        System.out.println("--- Science Student ---");
+        super.display();
+        displayPracticalMarks();
+    }
+}
+
+class ArtsStudent extends STUDENT {
+    String electiveSubject;
+
+    ArtsStudent(String sname, int[] marks_array, String electiveSubject) {
+        super(sname, marks_array);
+        this.electiveSubject = electiveSubject;
+    }
+
+    @Override
+    void display() {
+        System.out.println("--- Arts Student ---");
+        super.display();
+        System.out.println("Elective Subject: " + electiveSubject);
+    }
+}
+
+public class Q1Main {
+    public static void main(String[] args) {
+
+        STUDENT s = new STUDENT("Ravi", new int[]{75, 80, 70, 85, 90});
+        s.compute();
+        System.out.println("--- General Student ---");
+        s.display();
+        System.out.println();
+
+        ScienceStudent sc = new ScienceStudent("Priya", new int[]{88, 76, 92, 84, 95}, 45);
+        sc.compute();
+        sc.display();
+        System.out.println();
+
+        ArtsStudent art = new ArtsStudent("Ananya", new int[]{72, 68, 80, 77, 74}, "History");
+        art.compute();
+        art.display();
+        System.out.println();
+
+        // Dynamic Polymorphism
+        System.out.println("=== Dynamic Polymorphism Demo ===");
+        STUDENT[] students = {s, sc, art};
+        for (STUDENT st : students) {
+            st.compute();
+            st.display();
+            System.out.println();
+        }
+    }
+}
