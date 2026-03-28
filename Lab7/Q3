@@ -1,0 +1,94 @@
+class Building {
+    double squareFootage;
+    int stories;
+
+    Building() {
+        squareFootage = 0;
+        stories = 0;
+    }
+
+    Building(double squareFootage, int stories) {
+        this.squareFootage = squareFootage;
+        this.stories = stories;
+    }
+
+    void display() {
+        System.out.println("Square Footage : " + squareFootage);
+        System.out.println("Stories        : " + stories);
+    }
+}
+
+class House extends Building {
+    int bedrooms;
+    int baths;
+
+    House() {
+        super();
+        bedrooms = 0;
+        baths = 0;
+    }
+
+    House(double sqft, int stories, int bedrooms, int baths) {
+        super(sqft, stories);
+        this.bedrooms = bedrooms;
+        this.baths = baths;
+    }
+
+    @Override
+    void display() {
+        System.out.println("--- House ---");
+        super.display();
+        System.out.println("Bedrooms       : " + bedrooms);
+        System.out.println("Baths          : " + baths);
+    }
+}
+
+class School extends Building {
+    int classrooms;
+    String gradeLevel;
+
+    School() {
+        super();
+        classrooms = 0;
+        gradeLevel = "Unknown";
+    }
+
+    School(double sqft, int stories, int classrooms, String gradeLevel) {
+        super(sqft, stories);
+        this.classrooms = classrooms;
+        this.gradeLevel = gradeLevel;
+    }
+
+    @Override
+    void display() {
+        System.out.println("--- School ---");
+        super.display();
+        System.out.println("Classrooms     : " + classrooms);
+        System.out.println("Grade Level    : " + gradeLevel);
+    }
+}
+
+public class BuildingDemo {
+    public static void main(String[] args) {
+
+        Building b = new Building(5000, 3);
+        b.display();
+        System.out.println();
+
+        House h = new House(2400, 2, 4, 3);
+        h.display();
+        System.out.println();
+
+        School sc = new School(15000, 4, 30, "Junior High");
+        sc.display();
+        System.out.println();
+
+        // Dynamic Polymorphism
+        System.out.println("=== Dynamic Polymorphism Demo ===");
+        Building[] buildings = {b, h, sc};
+        for (Building bld : buildings) {
+            bld.display();
+            System.out.println();
+        }
+    }
+}
