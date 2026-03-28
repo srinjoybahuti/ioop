@@ -1,0 +1,109 @@
+class EMPLOYEE {
+    String eName;
+    int eId;
+    double basic;
+    double grossSal, netSal;
+
+    EMPLOYEE(String eName, int eId, double basic) {
+        this.eName = eName;
+        this.eId = eId;
+        this.basic = basic;
+    }
+
+    void calculateSalary() {
+        double da = basic * 0.52;
+        grossSal = basic + da;
+        double it = grossSal * 0.30;
+        netSal = grossSal - it;
+    }
+
+    void displayEmployeeDetails() {
+        System.out.println("Name      : " + eName);
+        System.out.println("ID        : " + eId);
+        System.out.println("Basic     : " + basic);
+        System.out.println("Gross Sal : " + grossSal);
+        System.out.println("Net Sal   : " + netSal);
+    }
+}
+
+class PartTimeEmp extends EMPLOYEE {
+    int hoursWorked;
+    static final double hourlyRate = 250.0;
+
+    PartTimeEmp(String eName, int eId, int hoursWorked) {
+        super(eName, eId, 0);
+        this.hoursWorked = hoursWorked;
+    }
+
+    @Override
+    void calculateSalary() {
+        netSal = hoursWorked * hourlyRate;
+        grossSal = netSal;
+    }
+
+    @Override
+    void displayEmployeeDetails() {
+        System.out.println("--- Part-Time Employee ---");
+        System.out.println("Name         : " + eName);
+        System.out.println("ID           : " + eId);
+        System.out.println("Hours Worked : " + hoursWorked);
+        System.out.println("Hourly Rate  : " + hourlyRate);
+        System.out.println("Total Pay    : " + netSal);
+    }
+}
+
+class FullTimeEmp extends EMPLOYEE {
+    double bonus;
+    double deductions;
+
+    FullTimeEmp(String eName, int eId, double basic, double bonus, double deductions) {
+        super(eName, eId, basic);
+        this.bonus = bonus;
+        this.deductions = deductions;
+    }
+
+    @Override
+    void calculateSalary() {
+        super.calculateSalary();
+        netSal = netSal + bonus - deductions;
+    }
+
+    @Override
+    void displayEmployeeDetails() {
+        System.out.println("--- Full-Time Employee ---");
+        super.displayEmployeeDetails();
+        System.out.println("Bonus        : " + bonus);
+        System.out.println("Deductions   : " + deductions);
+        System.out.println("Final Net Sal: " + netSal);
+    }
+}
+
+public class Q2Main {
+    public static void main(String[] args) {
+
+        EMPLOYEE emp = new EMPLOYEE("Ramesh", 101, 40000);
+        emp.calculateSalary();
+        System.out.println("--- Base Employee ---");
+        emp.displayEmployeeDetails();
+        System.out.println();
+
+        PartTimeEmp pt = new PartTimeEmp("Suresh", 102, 80);
+        pt.calculateSalary();
+        pt.displayEmployeeDetails();
+        System.out.println();
+
+        FullTimeEmp ft = new FullTimeEmp("Kavita", 103, 60000, 5000, 2000);
+        ft.calculateSalary();
+        ft.displayEmployeeDetails();
+        System.out.println();
+
+        // Dynamic Polymorphism
+        System.out.println("=== Dynamic Polymorphism Demo ===");
+        EMPLOYEE[] list = {emp, pt, ft};
+        for (EMPLOYEE e : list) {
+            e.calculateSalary();
+            e.displayEmployeeDetails();
+            System.out.println();
+        }
+    }
+}
