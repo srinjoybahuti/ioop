@@ -1,0 +1,122 @@
+class Account {
+    String customerName;
+    int accNo;
+    String accType;
+    double balance;
+
+    Account(String customerName, int accNo, String accType, double balance) {
+        this.customerName = customerName;
+        this.accNo = accNo;
+        this.accType = accType;
+        this.balance = balance;
+    }
+
+    void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposited: " + amount + " | New Balance: " + balance);
+    }
+
+    void displayBalance() {
+        System.out.println("Current Balance: " + balance);
+    }
+
+    void display() {
+        System.out.println("Name    : " + customerName);
+        System.out.println("Acc No  : " + accNo);
+        System.out.println("Type    : " + accType);
+        System.out.println("Balance : " + balance);
+    }
+}
+
+class SavingsAccount extends Account {
+    static final double INTEREST_RATE = 0.04;
+    static final double MIN_BALANCE = 1000.0;
+
+    SavingsAccount(String name, int accNo, double balance) {
+        super(name, accNo, "Savings", balance);
+    }
+
+    void computeAndDepositInterest() {
+        double interest = balance * INTEREST_RATE;
+        balance += interest;
+        System.out.println("Interest Added: " + interest + " | New Balance: " + balance);
+    }
+
+    void withdraw(double amount) {
+        if (balance - amount < MIN_BALANCE) {
+            System.out.println("Withdrawal denied! Must maintain minimum balance of " + MIN_BALANCE);
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawn: " + amount + " | Remaining Balance: " + balance);
+        }
+    }
+
+    @Override
+    void display() {
+        System.out.println("--- Savings Account ---");
+        super.display();
+    }
+}
+
+class CurrentAccount extends Account {
+    static final double MIN_BALANCE = 5000.0;
+    static final double SERVICE_TAX = 500.0;
+
+    CurrentAccount(String name, int accNo, double balance) {
+        super(name, accNo, "Current", balance);
+    }
+
+    void withdraw(double amount) {
+        balance -= amount;
+        System.out.println("Withdrawn: " + amount + " | Balance after withdrawal: " + balance);
+        checkMinimumBalance();
+    }
+
+    void checkMinimumBalance() {
+        if (balance < MIN_BALANCE) {
+            System.out.println("Balance below minimum! Imposing service tax of " + SERVICE_TAX);
+            balance -= SERVICE_TAX;
+            System.out.println("Balance after penalty: " + balance);
+        }
+    }
+
+    void computeAndDepositInterest() {
+        System.out.println("No interest applicable for Current Account.");
+    }
+
+    @Override
+    void display() {
+        System.out.println("--- Current Account ---");
+        super.display();
+    }
+}
+
+public class AccountDemo {
+    public static void main(String[] args) {
+
+        SavingsAccount sa = new SavingsAccount("Arjun", 1001, 5000);
+        sa.display();
+        sa.deposit(2000);
+        sa.computeAndDepositInterest();
+        sa.withdraw(1000);
+        sa.withdraw(5800);   // should be denied
+        sa.displayBalance();
+        System.out.println();
+
+        CurrentAccount ca = new CurrentAccount("Meena", 2001, 8000);
+        ca.display();
+        ca.deposit(3000);
+        ca.withdraw(6500);   // triggers penalty
+        ca.computeAndDepositInterest();
+        ca.displayBalance();
+        System.out.println();
+
+        // Dynamic Polymorphism
+        System.out.println("=== Dynamic Polymorphism Demo ===");
+        Account[] accounts = {sa, ca};
+        for (Account acc : accounts) {
+            acc.display();
+            System.out.println();
+        }
+    }
+}
