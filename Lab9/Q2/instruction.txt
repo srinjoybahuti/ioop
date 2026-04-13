@@ -1,0 +1,20 @@
+Lab Exercise 2 — Employee Management System
+Step 1 — Create Project
+Open Eclipse. Go to File, then New, then Java Project. Type EmployeeManagement as the project name and click Finish.
+Step 2 — Create 4 Packages
+Right-click on src folder, select New, then Package. Create these four packages one by one:
+edu.manipal.mahe.employee
+edu.manipal.mahe.department
+edu.manipal.mahe.payroll
+edu.manipal.mahe.main
+Step 3 — Create Classes
+Right-click on edu.manipal.mahe.employee package, select New, then Class, type Employee as class name, do NOT check the main method option, click Finish.
+Right-click on edu.manipal.mahe.department package, select New, then Class, type Department as class name, do NOT check the main method option, click Finish.
+Right-click on edu.manipal.mahe.payroll package, select New, then Class, type Payroll as class name, do NOT check the main method option, click Finish.
+Right-click on edu.manipal.mahe.main package, select New, then Class, type Main as class name, CHECK the main method option this time, click Finish.
+Step 4 — Paste Code
+Click on Employee.java and paste the Employee code. Click on Department.java and paste the Department code. Click on Payroll.java and paste the Payroll code. Click on Main.java and paste the Main code.
+Step 5 — Fix Imports
+Press Ctrl + Shift + O on each file to automatically add missing imports.
+Step 6 — Run
+Right-click on Main.java, select Run As, then Java Application. Output will appear in the Console at the bottom.
