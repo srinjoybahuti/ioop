@@ -1,0 +1,20 @@
+Lab Exercise 1 — Student Management System
+Step 1 — Create Project
+Open Eclipse. Go to File, then New, then Java Project. Type StudentManagement as the project name and click Finish.
+Step 2 — Create 4 Packages
+Right-click on src folder, select New, then Package. Create these four packages one by one:
+edu.manipal.mit.student
+edu.manipal.mit.course
+edu.manipal.mit.registration
+edu.manipal.mit.main
+Step 3 — Create Classes
+Right-click on edu.manipal.mit.student package, select New, then Class, type Student as class name, do NOT check the main method option, click Finish.
+Right-click on edu.manipal.mit.course package, select New, then Class, type Course as class name, do NOT check the main method option, click Finish.
+Right-click on edu.manipal.mit.registration package, select New, then Class, type Registration as class name, do NOT check the main method option, click Finish.
+Right-click on edu.manipal.mit.main package, select New, then Class, type Main as class name, CHECK the main method option this time, click Finish.
+Step 4 — Paste Code
+Click on Student.java and paste the Student code. Click on Course.java and paste the Course code. Click on Registration.java and paste the Registration code. Click on Main.java and paste the Main code.
+Step 5 — Fix Imports
+Press Ctrl + Shift + O on each file to automatically add missing imports.
+Step 6 — Run
+Right-click on Main.java, select Run As, then Java Application. Output will appear in the Console at the bottom.
